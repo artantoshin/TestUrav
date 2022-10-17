@@ -4,6 +4,16 @@ namespace SolverTests
 {
     public class SolverTest
     {
+        void TestEquation(double a, double b, double c, double[] expectedResult)
+        {
+            var result = QuadraticEquationSolver.Solve(a, b, c);
+
+            Assert.Equal(expectedResult.Length, result.Length);
+            
+            for (int i = 0; i < result.Length; i++)
+                Assert.Equal(expectedResult[i], result[i]);
+        }
+
         [Fact]
         public void OrdinaryEquation()
         {
@@ -11,11 +21,7 @@ namespace SolverTests
             var b = -3;
             var c = 2;
 
-            var result = QuadraticEquationSolver.Solve(a, b, c);
-
-            Assert.Equal(2, result.Length);
-            Assert.Equal(2, result[0]);
-            Assert.Equal(1, result[1]);
+            TestEquation(a, b, c, new double[] {2,1});
         }
 
         [Fact]
@@ -25,9 +31,7 @@ namespace SolverTests
             var b = 1;
             var c = 1;
 
-            var result = QuadraticEquationSolver.Solve(a, b, c);
-
-            Assert.Equal(0, result.Length);
+            TestEquation(a, b, c, new double[0]);
         }
     }
 }
